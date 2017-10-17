@@ -1,3 +1,16 @@
 <% @posts.each do |post| %>
   <%= render partial: "post", locals: {post: post} %>
 <% end %>
+<script type='text/javascript' charset='utf-8'>
+$(function () {
+  $('.js-more').on('click', function(){
+    const id = $(this).data('id')
+    fetch('/posts/' + id + '/body')
+      .then(res => res.text())
+      .then(newText => {
+        $(`#body-${id}`).text(newText)
+      }
+    )
+  });
+});
+</script>
